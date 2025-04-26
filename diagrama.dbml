@@ -1,0 +1,40 @@
+table users
+{
+    id int [pk, increment]
+    name varchar
+    email varchar
+    password varchar
+    created_at datetime
+    updated_at datetime
+}
+
+table categorias
+{
+    id int [pk, increment]
+   nombre varchar(255)
+   tipo enum('ingreso', 'gasto')
+}
+
+table movimientos
+{
+    id int [pk, increment]
+    user_id int [ref: > users.id]
+    categoria_id int [ref: > categorias.id]
+    tipo enum('ingreso', 'gasto')
+    monto decimal(10, 2)
+    descripcion text
+
+    foto varchar(255)
+    fecha datetime
+}
+
+table presupuestos
+{
+    id int [pk, increment]
+    user_id int [ref: > users.id]
+    categoria_id int [ref: > categorias.id]
+    monto_asignado decimal(10, 2)
+    monto_gastado decimal(10, 2)
+    mes varchar(20)
+    anio int
+}
